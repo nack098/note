@@ -29,7 +29,7 @@
   if cover_image != none {
     align(center)[
       #block(
-        stroke: 0.5pt + gray.lighten(50%),
+        stroke: none,
         radius: 4pt,
         clip: true,
         width: 100%,
@@ -39,10 +39,6 @@
         } else {
           cover_image
         }
-      ]
-      #v(0.8em)
-      #text(size: 8pt, fill: gray.darken(20%), style: "italic")[
-        Fig 0.0: Architectural view of discretized system entities.
       ]
     ]
   }

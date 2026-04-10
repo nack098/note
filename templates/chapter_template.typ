@@ -16,6 +16,16 @@
   }
 })
 
+#let image-fig(img, cap) = {
+  set text(size: 8pt, weight: "light", fill: black.lighten(15%))
+
+  block(width: 100%)[
+    #v(1.25em)
+    #figure(img, caption: cap, gap: 1.5em)
+    #v(1.25em)
+  ]
+}
+
 #let callout(title, color, content) = rect(
   fill: color.lighten(90%),
   stroke: (left: 4pt + color),
@@ -75,6 +85,7 @@
 
   // Scaled down body text for A5
   set text(font: "Inter", size: 9.5pt, fill: rgb("#2c3e50"))
+  set par(justify: true)
 
   show heading.where(level: 1): it => [
     #set text(size: 18pt, weight: "bold", fill: rgb("#1a3a5f"))
@@ -103,7 +114,7 @@
     #align(bottom + left)[
       #text(size: 14pt, weight: "medium", fill: gray, subtitle) \
       #text(size: 24pt, weight: "bold", fill: rgb("#1a3a5f"), title)
-      #line(length: 60%, stroke: 1.5pt + rgb("#1a3a5f")),
+      #line(length: 60%, stroke: 1.5pt + rgb("#1a3a5f"))
     ]
   ]
 
