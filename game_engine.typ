@@ -1,5 +1,5 @@
 #import "templates/title_template.typ": title
-#import "templates/chapter_template.typ": chapter, overflowing-image, image-fig
+#import "templates/chapter_template.typ": callout, chapter, concept, definition, image-fig, overflowing-image
 
 #title(
   cover_image: align(center + horizon)[
@@ -7,9 +7,9 @@
       #move(dy: -25pt)[
         #image("assets/title.png", height: 100%, fit: "cover")
       ]
-      
+
     ]
-  ]
+  ],
 )
 
 #show: chapter.with(
@@ -18,26 +18,33 @@
   subtitle: "Chapter 1",
   author: "Nakuya (泣くや)",
   cover_image: align(center + horizon)[
-    
+
     #box(width: 100%, height: 85%, clip: true)[
       #move(dx: 76pt)[
         #overflowing-image(image("assets/chapter1.png"))
       ]
-      
-    ]
-  ]
 
+    ]
+  ],
 )
 
 = Introduction
 
 // Reference https://www.history.com/articles/history-of-video-games
 // Reference https://www.bnl.gov/about/history/firstvideo.php
-On the morning of October 18, 1958, inside a lab at Brookhaven National Laboratory, two people were playing what would later be called 'Tennis for Two.' 
+On the morning of October 18, 1958, inside a lab at Brookhaven National Laboratory, two people were playing what would later be called 'Tennis for Two.'
 This game is marked as the first in the history of computer gaming. We began by playing on oscilloscopes; now, we play games on vending machines, refrigerators, or even pregnancy tests. (I see you all, the 'Mr. Play Doom' crowd, porting it to anything with a processor!)
 
 // Image Reference https://www.bnl.gov/about/history/firstvideo.php
 #image-fig(
   image("assets/tennis_for_two.jpg", height: 24em),
-  [A recreation of the original Tennis For Two constructed for the 50th anniversary of the game's first appearance.]
+  [A recreation of the original Tennis For Two constructed for the 50th anniversary of the game's first appearance.],
 )<tennis>
+
+#pagebreak()
+
+We started from writing game line by line in assembly to not having to write anything just having an idea to create a game.
+But at the end in order to write an actual scalable, maintainable, with exceptable performance game. We need to understand how so called _"Game Engine"_ works under the hood.
+Otherwise the _"friend"_ will become your biggest _"enemy"_.
+
+== Game Engine Definition

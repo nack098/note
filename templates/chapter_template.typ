@@ -42,6 +42,7 @@
 #let goal(body) = callout("Design Goal", rgb("#2ecc71"), body)
 #let pitfall(body) = callout("Performance Pitfall", rgb("#e74c3c"), body)
 #let concept(body) = callout("Core Concept", rgb("#3498db"), body)
+#let definition(body) = callout("Definition", rgb("#f39c12"), body)
 
 #let chapter(
   name: "Untitle",
@@ -53,8 +54,8 @@
 ) = {
   // Macchiato palette for code blocks
   let macchiato = flavors.macchiato.colors
-  
-  set raw(theme: "macchiato.tmTheme") 
+
+  set raw(theme: "macchiato.tmTheme")
   // Scaled down code font for A5
   show raw: set text(font: "Fira Code", weight: "medium", size: 8.5pt)
 
@@ -69,7 +70,7 @@
         radius: 6pt,
       )[
         #set text(fill: macchiato.text.rgb)
-        
+
         #if it.has("lang") {
           place(top + right, text(7pt, fill: macchiato.overlay1.rgb, weight: "bold")[#it.lang])
         }
@@ -92,7 +93,7 @@
     #block(width: 100%, below: 1em)[
       #stack(
         dir: ttb,
-        spacing: 12pt, 
+        spacing: 12pt,
         it,
         line(length: 100%, stroke: 1.5pt + rgb("#1a3a5f")),
       )
