@@ -1,5 +1,24 @@
 #import "@preview/catppuccin:1.1.0": flavors
 
+#let block-quote(body, author: "", source: "") = {
+  v(1em)
+  block(
+    width: 100%,
+    inset: (left: 1.5em, top: 0.5em, bottom: 0.5em),
+    stroke: (left: 2pt + black.lighten(70%)),
+  )[
+    #set text(style: "italic", fill: black.lighten(10%))
+    #body
+
+    #if author != "" [
+      #v(0.5em)
+      #set text(style: "normal", weight: "bold", size: 0.9em)
+      --- #author #if source != "" [, #set text(weight: "regular"); #source]
+    ]
+  ]
+  v(1em)
+}
+
 #let overflowing-image(img) = layout(container => {
   let dim = measure(img)
   let container-ratio = container.width / container.height
@@ -94,7 +113,7 @@
       #stack(
         dir: ttb,
         spacing: 12pt,
-        it,
+        it.body,
         line(length: 100%, stroke: 1.5pt + rgb("#1a3a5f")),
       )
     ]
