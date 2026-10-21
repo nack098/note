@@ -1,2 +1,4 @@
+out/
+.takayama_runtime/
+
 *.pdf
-.typst/

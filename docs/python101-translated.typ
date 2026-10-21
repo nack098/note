@@ -1,5 +1,10 @@
-#import "templates/title_template.typ": title
-#import "templates/chapter_template.typ": chapter, sidenote, warning
+//  name: "Python 101",
+//  author: "Tapaneeya Odmung",
+//  major: 0,
+//  minor: 1,
+
+#import "../shared/title_template.typ": title
+#import "../shared/chapter_template.typ": chapter, sidenote, warning
 
 #show: title.with(
   title: "Python 101",
@@ -8,7 +13,7 @@
   version: "1.0.2 - translated",
   author: "Tapaneeya Odmung",
   paper: "a4",
-  cover_image: image("assets/python-logo.png"),
+  cover_image: image("../assets/python-logo.png"),
 )
 
 #outline()
@@ -402,7 +407,7 @@ List is a datatype that keep group of information with ordering. Each informatio
   - a = [1,2,3]; b = [1,2,3]; c = b; d = list(b)
     #v(-2pt)
     Get the result as image below. Interestingly c = b result in c and b to be the same list
-    #align(center)[#image("assets/listptr.png", width: 100pt)]
+    #align(center)[#image("../assets/listptr.png", width: 100pt)]
 - Using `+` in order to append list and using `*` in order to `+` multiple of times\
   x = 2\*([1,2,3] + [3,4,5]) Create x = [1,2,3,3,4,5,1,2,3,3,4,5]
 - x.append(i) add e at the end (right hand side) of list x
