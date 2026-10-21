@@ -1,3 +1,5 @@
+#import "@preview/catppuccin:1.1.0": flavors
+
 #let title(
   title: "GAME SYSTEM ARCHITECTURE",
   subtitle: "From a Game Engine Perspective",
@@ -5,12 +7,45 @@
   role: "Software Engineer",
   cover_image: none,
   version: "1.0.0",
+  paper: "a5",
+  body,
 ) = {
+  let macchiato = flavors.macchiato.colors
+
+  set raw(theme: "macchiato.tmTheme")
+  show raw: set text(font: "Fira Code", weight: "medium", size: 8.5pt)
+
+  show raw: it => {
+    if it.block [
+      #v(1em)
+      #block(
+        fill: macchiato.base.rgb,
+        stroke: 1pt + macchiato.surface1.rgb,
+        width: 100%,
+        inset: 12pt,
+        radius: 6pt,
+      )[
+        #set text(fill: macchiato.text.rgb)
+        #it
+      ]
+    ] else [
+      #box(
+        fill: macchiato.surface0.rgb,
+        inset: (x: 4pt, y: 2pt),
+        outset: (y: 2pt),
+        radius: 3pt,
+        baseline: 2pt,
+      )[
+        #text(fill: macchiato.text.rgb, it)
+      ]
+    ]
+  }
+
   let primary-blue = rgb("#1a3a5f")
   let body-gray = rgb("#2c3e50")
 
   set page(
-    paper: "a5",
+    paper: paper,
     margin: (x: 0.8in, y: 1in),
   )
 
@@ -53,6 +88,7 @@
     #text(size: 8pt, fill: gray)[#role] \
     #text(size: 6pt, font: "Geist Mono", weight: "light", fill: gray.lighten(20%))[BUILD_REV: #version] ]
   pagebreak()
+  body
 }
 
 // Academic cover page, styled with the same design language as `title`,

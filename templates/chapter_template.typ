@@ -60,6 +60,9 @@
 
 #let goal(body) = callout("Design Goal", rgb("#2ecc71"), body)
 #let pitfall(body) = callout("Performance Pitfall", rgb("#e74c3c"), body)
+#let sidenote(body) = callout("Side Note", rgb("#e74c3c"), body)
+#let warning(body) = callout("Warning", rgb("#e74c3c"), body)
+#let innervoice(body) = callout("Inner Voice", rgb("#e74c3c"), body)
 #let concept(body) = callout("Core Concept", rgb("#3498db"), body)
 #let definition(body) = callout("Definition", rgb("#f39c12"), body)
 
@@ -69,44 +72,9 @@
   subtitle: "Untitled",
   author: "Nakuya",
   cover_image: none,
+  paper: "a5",
   body,
 ) = {
-  // Macchiato palette for code blocks
-  let macchiato = flavors.macchiato.colors
-
-  set raw(theme: "macchiato.tmTheme")
-  // Scaled down code font for A5
-  show raw: set text(font: "Fira Code", weight: "medium", size: 8.5pt)
-
-  show raw: it => {
-    if it.block [
-      #v(1em)
-      #block(
-        fill: macchiato.base.rgb,
-        stroke: 1pt + macchiato.surface1.rgb,
-        width: 100%,
-        inset: 12pt,
-        radius: 6pt,
-      )[
-        #set text(fill: macchiato.text.rgb)
-
-        #if it.has("lang") {
-          place(top + right, text(7pt, fill: macchiato.overlay1.rgb, weight: "bold")[#it.lang])
-        }
-        #it
-      ]
-    ] else [
-      #v(1em)
-      #box(fill: macchiato.surface0.rgb, inset: (x: 3pt, y: 0pt), radius: 3pt)[
-        #text(fill: macchiato.flamingo.rgb, it)
-      ]
-    ]
-  }
-
-  // Scaled down body text for A5
-  set text(font: "Inter", size: 9.5pt, fill: rgb("#2c3e50"))
-  set par(justify: true)
-
   show heading.where(level: 1): it => [
     #set text(size: 18pt, weight: "bold", fill: rgb("#1a3a5f"))
     #block(width: 100%, below: 1em)[
@@ -124,7 +92,7 @@
     #block(it, above: 1.5em, below: 1em, sticky: true)
   ]
 
-  page(paper: "a5", header: none, footer: none, margin: 0.8in)[
+  page(paper: paper, header: none, footer: none, margin: 0.8in)[
     #if cover_image != none [
       #align(center)[
         #cover_image
@@ -139,7 +107,7 @@
   ]
 
   set page(
-    paper: "a5",
+    paper: paper,
     margin: (x: 0.8in, y: 1in),
     header: context {
       set text(8pt, fill: gray)
