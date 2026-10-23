@@ -1,10 +1,10 @@
 //  name: "Python 101",
 //  author: "Tapaneeya Odmung",
 //  major: 0,
-//  minor: 1,
+//  minor: 2,
 
 #import "../shared/title_template.typ": title
-#import "../shared/chapter_template.typ": chapter, sidenote, warning, technical
+#import "../shared/chapter_template.typ": chapter, sidenote, technical, warning
 
 #show: title.with(
   title: "Python 101",
@@ -175,6 +175,7 @@ There are multiple way to write a string
           c += 1
     ```
   ],
+
   box()[
     Counting how many occurence of character t within s
     ```py
@@ -194,7 +195,7 @@ There are multiple way to write a string
         c += 1
         k = s.find(t, k+1)
         # 'aaaaaa' has 4 'aaa'
-    
+
     # or
     c = 0
     for i in range(len(s)- len(t)+1):
@@ -202,6 +203,7 @@ There are multiple way to write a string
             c+=1
     ```
   ],
+
   box()[
     Using string as a temporary bucket for printing later.
   ],
@@ -223,6 +225,7 @@ There are multiple way to write a string
     """
     ```
   ],
+
   box()[
     Picking a substring that is in between a formatted string.
   ],
@@ -246,6 +249,7 @@ There are multiple way to write a string
         print( 'No title' )
     ```
   ],
+
   box()[
     Using string as a information bucket in order to change integer into string.
   ],
@@ -262,6 +266,7 @@ There are multiple way to write a string
         print( 'invalid month number' )
     ```
   ],
+
   box()[
     Using 2 strings to keep information in order to update one string into the other.
   ],
@@ -281,7 +286,7 @@ There are multiple way to write a string
     else:
         print( 'Not found' )
     ```
-  ]
+  ],
 )
 
 == Common Mistake
@@ -298,6 +303,7 @@ There are multiple way to write a string
     s = "You shouted "Hey!" very loudly yesterday"
     ```
   ],
+
   box()[
     Receiving input from keyboard. Should always use `strip` because user might insert more space on the left or the right.
     such as #"\"  Hello\"" or #"\"hEllo   \""
@@ -316,6 +322,7 @@ There are multiple way to write a string
     """
     ```
   ],
+
   box()[
     Using index that is not in range of allowed value of string.\
     Don't forget that index of string s can only in range from 0 to len(s) - 1 from left to right and -1 to -len(s) from right to left.
@@ -329,6 +336,7 @@ There are multiple way to write a string
         # if len(s) < 10 will cause an error
     ```
   ],
+
   box()[
     Using index of string that is not integer.
   ],
@@ -338,6 +346,7 @@ There are multiple way to write a string
     # wrong, because n/2 is a real number
     ```
   ],
+
   box()[
     Try to change value inside of string.
   ],
@@ -352,9 +361,12 @@ There are multiple way to write a string
     t = t[-1] + t[1:-1] + t[0]
     ```
   ],
+
   box()[
     Write a string that is a location of a file with \\ symbol but doesn't use \\\\.
-    #sidenote("In python and most of programming language, symbol \ is a special character that is being used to do a lot of operation. In order to use it, we must use 2 of them in order to tell the program that we intend to write a \ symbol.")
+    #sidenote(
+      "In python and most of programming language, symbol \ is a special character that is being used to do a lot of operation. In order to use it, we must use 2 of them in order to tell the program that we intend to write a \ symbol.",
+    )
   ],
   box()[
     ```py
@@ -363,6 +375,7 @@ There are multiple way to write a string
     s = "c:\\temp\\data\\input.txt"
     ```
   ],
+
   box()[
     Try to sum string with other data types.
   ],
@@ -375,7 +388,7 @@ There are multiple way to write a string
     # or
     print("average =", avg)
     ```
-  ]
+  ],
 )
 
 #show: chapter.with(
@@ -1295,6 +1308,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     # get (1, 2, 3)
     ```
   ],
+
   box()[
     Accessing information like list.
   ],
@@ -1305,6 +1319,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     my_tuple[-2:-1] # got (3,)
     ```
   ],
+
   box()[
     `+` symbol uses for appending tuple.\
     `*` symbol uses for appending tuple multiple time.
@@ -1326,6 +1341,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     """
     ```
   ],
+
   box()[
     Cannot modify value in tuple (like string)
   ],
@@ -1338,6 +1354,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     my_tuple = my_tuple[:3] + ('B',) + my_tuple[4:]
     ```
   ],
+
   box()[
     In python, everything that has comma in between will result in a tuple such as `t = 1,2,3` when print(t) will result as (1, 2, 3)
   ],
@@ -1352,6 +1369,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     # swapping value between a and x
     ```
   ],
+
   box()[
     We can create list of tuple.
   ],
@@ -1363,6 +1381,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     L[1][2] # will result as 300
     ```
   ],
+
   box()[
     We can create a tuple of list.
   ],
@@ -1377,6 +1396,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     """
     ```
   ],
+
   box()[
     We can create tuple of tuple.
   ],
@@ -1387,6 +1407,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     T[1][0] # get 3
     ```
   ],
+
   box()[
     The difference of
     `tuple1 += (0,)` and `list1 += [0]` is that\ \
@@ -1405,7 +1426,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     """
     import time
     n = 100000
-    
+
     t0 = time.time()
     list1 = []
     for k in range(n):
@@ -1418,7 +1439,7 @@ List can contain anything, integer, real number, string, or else, even a list it
         tuple1 += (0,)
     print(time.time()-t0)
     ```
-  ]
+  ],
 )
 
 == Dictionary
@@ -1444,6 +1465,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     dict2 = {'Name': 'Tom', 'Age':39}
     ```
   ],
+
   box()[
     We can modify and adding value by indentifying key.
   ],
@@ -1456,6 +1478,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     # Modifying information to ('Name', 'Somsri')
     ```
   ],
+
   box()[
     `key` of a `dict` can also be integer value, real value, string, or even tuple. But, it cannot be list, dict, or set but `value` of a `dict` can be any data types.
   ],
@@ -1471,6 +1494,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     # Cannot use list as a key
     ```
   ],
+
   box()[
     There are `keys()`, `values()`, and `items()` that can be used with `for...in`.
   ],
@@ -1500,12 +1524,15 @@ List can contain anything, integer, real number, string, or else, even a list it
         *Prior to Python 3.7*, when looping through dictionary, *it will not be by an insertion order rather it will be by random.* (For technical person, it will be by hash number order).\ \
         *But since Python 3.7*, when looping through dictionary, *it will always be by an insertion order.*\ \
         *Recommendation*, when creating dictionary we should always *keep the insertion order as a separate list* and looping using that instead. (if we want to keep the same behavior accross all version of *Python 3*)
-      ]
+      ],
     )
   ],
+
   box()[
     Function `keys()`, `values()`, and `items()` will not result in `list` but something similar to `list` which could be used in `for...in` but cannot be accessed via index.
-    #technical(box()[It calls an *iterator object* which will always return value until a Stopiteration error occur that's meant we can write any custom object (which will be in detail on last subject) to be used inside of for...in loop. That's also why not every object in python that can be used in for...in but might not be able to access via index.])
+    #technical(
+      box()[It calls an *iterator object* which will always return value until a Stopiteration error occur that's meant we can write any custom object (which will be in detail on last subject) to be used inside of for...in loop. That's also why not every object in python that can be used in for...in but might not be able to access via index.],
+    )
   ],
   box()[
     ```py
@@ -1527,6 +1554,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     """
     ```
   ],
+
   box()[
     Function `d.update(d1)` means we adding new information from dict d1 into d and if key in d1 is already existed in d, it will update that value instead.
   ],
@@ -1542,6 +1570,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     """
     ```
   ],
+
   box()[
     Function `pop(key)` will remove the pair of data that has a same `key`. but if `key` does not exist, it will cause an error.
   ],
@@ -1557,6 +1586,7 @@ List can contain anything, integer, real number, string, or else, even a list it
     y = C.pop(4) # this will cause an error
     ```
   ],
+
   box()[
     Using `in` to check if `key`, `value` or `(key,value)` pair is in dict or not but checking `value` is slower than the last two.
     #technical(box()[
@@ -1574,5 +1604,5 @@ List can contain anything, integer, real number, string, or else, even a list it
     Searching using keys and items is much faster than searching by values.
     """
     ```
-  ]
+  ],
 )
