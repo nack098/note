@@ -4,7 +4,7 @@
 //  minor: 1,
 
 #import "../shared/title_template.typ": title
-#import "../shared/chapter_template.typ": chapter, sidenote, warning
+#import "../shared/chapter_template.typ": chapter, sidenote, warning, technical
 
 #show: title.with(
   title: "Python 101",
@@ -175,6 +175,207 @@ There are multiple way to write a string
           c += 1
     ```
   ],
+  box()[
+    Counting how many occurence of character t within s
+    ```py
+    c = 0
+    while t in s:
+        c += 1
+    """
+    This is wrong because if there is character t inside s the condition t in s will always be True hence it will become infinite loop.
+    """
+    ```
+  ],
+  box()[
+    ```py
+    c = 0
+    k = s.find(t)
+    while k >= 0:
+        c += 1
+        k = s.find(t, k+1)
+        # 'aaaaaa' has 4 'aaa'
+    
+    # or
+    c = 0
+    for i in range(len(s)- len(t)+1):
+        if s[i:i+len(t)] == t:
+            c+=1
+    ```
+  ],
+  box()[
+    Using string as a temporary bucket for printing later.
+  ],
+  box()[
+    ```py
+    """
+    Finding prime number that is less than 30.
+    """
+    result = ""
+    for n in range(2,30):
+        for k in range(2, n):
+            if n % k == 0: break
+            else:
+                result += str(n) + ", "
+    print(result[:-2])
+    """
+    This will result as
+    2, 3, 5, 7, 11, 13, 17, 19, 23, 29
+    """
+    ```
+  ],
+  box()[
+    Picking a substring that is in between a formatted string.
+  ],
+  box()[
+    ```python
+    """
+    Finding a sbustring that's in between "<title>" and </title>"
+    (Assuming that every string that has <title> will always have </title>)
+    """
+    t = input().strip()
+    a = t.find("<title>")
+    if a >= 0:
+    """
+      a      j      b
+    ..<title>.......</title>
+    """
+        j = a+len("<title>")
+        b = t.find("</title>", j)
+        print( t[j:b] )
+    else:
+        print( 'No title' )
+    ```
+  ],
+  box()[
+    Using string as a information bucket in order to change integer into string.
+  ],
+  box()[
+    ```py
+    """
+    Change a number of month m into a short month name.
+    """
+    months = "JANFEBMARAPRMAYJUNJULAUGSEPOCTNOVDEC"
+    m = int(input())
+    if 1 <= m <= 12:
+        print( months[(m-1)*3:m*3])
+    else:
+        print( 'invalid month number' )
+    ```
+  ],
+  box()[
+    Using 2 strings to keep information in order to update one string into the other.
+  ],
+  box()[
+    ```py
+    """
+    Finding currency short name (3 characters) from country short name (2 characters)
+    """
+    c = input().strip().lower() # country code
+    # USA, Thailand, Japan, China, Singapore
+    countries = "usthjpcnsg"
+    currency_codes = "USDTHBJPYCNYSGD"
+    k = countries.find(c)
+    if k >= 0:
+        k //= 2
+        print( currency_codes[3*k:3*(k+1)] )
+    else:
+        print( 'Not found' )
+    ```
+  ]
+)
+
+== Common Mistake
+#table(
+  columns: (1.5fr, 2.5fr),
+  box()[
+    String symbol doesn't match or writing it inside without putting \\ in front.
+  ],
+  box()[
+    ```py
+    s = "String
+    s = String'
+    s = "string'
+    s = "You shouted "Hey!" very loudly yesterday"
+    ```
+  ],
+  box()[
+    Receiving input from keyboard. Should always use `strip` because user might insert more space on the left or the right.
+    such as #"\"  Hello\"" or #"\"hEllo   \""
+  ],
+  box()[
+    ```py
+    """
+    This code below if user type ok with a space and then enter. The comparison will not equal to 'ok'
+    """
+    s = input()
+    if s == 'ok':
+        print('OK')
+    """
+    Therefore, we should write s = input().stript()
+    (Unless, we want to keep every user input for processing)
+    """
+    ```
+  ],
+  box()[
+    Using index that is not in range of allowed value of string.\
+    Don't forget that index of string s can only in range from 0 to len(s) - 1 from left to right and -1 to -len(s) from right to left.
+  ],
+  box()[
+    ```py
+    s = input().strip()
+    t = ""
+    for i in range(10):
+        t = s[i] + t
+        # if len(s) < 10 will cause an error
+    ```
+  ],
+  box()[
+    Using index of string that is not integer.
+  ],
+  box()[
+    ```py
+    print( s[n/2] )
+    # wrong, because n/2 is a real number
+    ```
+  ],
+  box()[
+    Try to change value inside of string.
+  ],
+  box()[
+    ```py
+    t = input().strip()
+    t[0],t[-1] = t[-1],t[0]
+    """
+    Try to switch first and last like this is wrong.
+    If we want to switch the first and the last. We must create new string
+    """
+    t = t[-1] + t[1:-1] + t[0]
+    ```
+  ],
+  box()[
+    Write a string that is a location of a file with \\ symbol but doesn't use \\\\.
+    #sidenote("In python and most of programming language, symbol \ is a special character that is being used to do a lot of operation. In order to use it, we must use 2 of them in order to tell the program that we intend to write a \ symbol.")
+  ],
+  box()[
+    ```py
+    s = "c\temp\data\input.txt" # This is wrong.
+    # Must be
+    s = "c:\\temp\\data\\input.txt"
+    ```
+  ],
+  box()[
+    Try to sum string with other data types.
+  ],
+  box()[
+    ```py
+    # (Go back to your JavaScript world)
+    print("average = " + avg) # This wrong
+    # Must be
+    print("average= " + str(avg))
+    # or
+    print("average =", avg)
+    ```
+  ]
 )
 
 #show: chapter.with(
@@ -1061,3 +1262,317 @@ List can contain anything, integer, real number, string, or else, even a list it
 )
 = List Comprehension
 \<TODO LMAO>
+
+#show: chapter.with(
+  name: "Python 101",
+  title: "Tuple, Dictionary, and Set",
+  subtitle: "Chapter 7",
+  author: "Tapaneeya Odmung",
+  paper: "a4",
+)
+= Tuple, Dictionary and Set
+== Tuple
+#table(
+  columns: (1.5fr, 2.5fr),
+  box()[
+    Creating `tuple` is the same as creating `list` but using normal brackets instead.
+  ],
+  box()[
+    ```py
+    my_list = [1, 2.5, 3, 'A'] # get a list
+    my_tuple = (1, 2.5, 3, 'A') # get a tuple
+    my_tuple_2 = (1,)
+    # get tuple that has a single value
+    # notice a comma
+    not_a_tuple = (1) # get an integer
+    # same as
+    not_a tuple = 1
+    t1 = tuple('abc')
+    # create tuple from string
+    # get ('a', 'b', 'c')
+    t2 = tuple([1,2,3])
+    # create tuple from list
+    # get (1, 2, 3)
+    ```
+  ],
+  box()[
+    Accessing information like list.
+  ],
+  box()[
+    ```py
+    my_tuple[0] # get 1
+    my_tuple[1:3] # get (2.5, 3)
+    my_tuple[-2:-1] # got (3,)
+    ```
+  ],
+  box()[
+    `+` symbol uses for appending tuple.\
+    `*` symbol uses for appending tuple multiple time.
+  ],
+  box()[
+    ```py
+    a = (2, 3, 5)
+    b = (7,)
+    p = a + b
+    # result as (2, 3, 5, 7)
+    q = p*2
+    # result as
+    # (2, 3, 5, 7, 2, 3, 5, 7)
+    a += (2,)
+    """
+    Same as writing a = a + (2,)
+    which meant appending original a with (2,) and creating new tuple.
+    result as (2, 3, 5, 2) and assign that tuple to a
+    """
+    ```
+  ],
+  box()[
+    Cannot modify value in tuple (like string)
+  ],
+  box()[
+    ```py
+    my_typle[3] = 'B' # this is wrong
+    """
+    If we want to modify tuple, we must create new one.
+    """
+    my_tuple = my_tuple[:3] + ('B',) + my_tuple[4:]
+    ```
+  ],
+  box()[
+    In python, everything that has comma in between will result in a tuple such as `t = 1,2,3` when print(t) will result as (1, 2, 3)
+  ],
+  box()[
+    ```python
+    a,b,c = (1,2,3)
+    # get a = 1, b = 2, c = 3
+    x,y = 'A', 'Z'
+    # get x = 'A', y = 'Z'
+    a,x = x,a
+
+    # swapping value between a and x
+    ```
+  ],
+  box()[
+    We can create list of tuple.
+  ],
+  box()[
+    ```python
+    L = [('A','B'), (1,20,300), (9.9,)]
+    # L is a list of tuple
+    L[1] # will result as (1,20,300)
+    L[1][2] # will result as 300
+    ```
+  ],
+  box()[
+    We can create a tuple of list.
+  ],
+  box()[
+    ```py
+    T = (['A','B'], [1,20,300], [9.9])
+    # T is a tuple of list
+    T[1] # get [1,20,300]
+    T[1][2] # get 300
+    """
+    T is a tuple hence we cannot do T[1] = 9 but since T[1] is a list, hence, we can do T[1][2] = 9.
+    """
+    ```
+  ],
+  box()[
+    We can create tuple of tuple.
+  ],
+  box()[
+    ```py
+    T = ((1,2), (3,4))
+    # T is a tuple of tuple
+    T[1][0] # get 3
+    ```
+  ],
+  box()[
+    The difference of
+    `tuple1 += (0,)` and `list1 += [0]` is that\ \
+    tuple1 += (0,) is the same as
+    tuple1 = tuple1 + (0,)\
+    which will create a new tuple (this is slow)
+    while list1 += [0]\
+    is not equalt to list1 = list1 + [0]
+    but more similar to list1.append(0)
+    which is adding 0 at the end of list not creating new one. Hence, this is faster.
+  ],
+  box()[
+    ```py
+    """
+    Try to ran this command an see the result of processing time.
+    """
+    import time
+    n = 100000
+    
+    t0 = time.time()
+    list1 = []
+    for k in range(n):
+        list1 += [0]
+    print(time.time()-t0)
+
+    t0 = time.time()
+    tuple1 = tuple()
+    for k in range(n):
+        tuple1 += (0,)
+    print(time.time()-t0)
+    ```
+  ]
+)
+
+== Dictionary
+- Using for keeping ordered pair like information ie (key, value)
+- There will be only one key that pair with only one value (but value can be list, tuple, ...or anything that can contain smaller value)
+- If we have key we can access its value extreamly fast.
+
+#table(
+  columns: (1.5fr, 2.5fr),
+  box()[
+    There are multiple way of creating `dict`. We can also identify value that we want to keep too.
+  ],
+  box()[
+    ```py
+    # Creating empty dict
+    dict1 = {}
+    # or
+    dict1 = dict()
+
+    # Creating dict with
+    # ('Name', 'Tom') and ('Age', 39)
+    # ordered pair.
+    dict2 = {'Name': 'Tom', 'Age':39}
+    ```
+  ],
+  box()[
+    We can modify and adding value by indentifying key.
+  ],
+  box()[
+    ```py
+    D = {'Name': 'Sarah'}
+    print(D['Name']) # get Sarah
+    D['Age'] = 20 # adding ('Age',20)
+    D['Name'] = 'Somsri'
+    # Modifying information to ('Name', 'Somsri')
+    ```
+  ],
+  box()[
+    `key` of a `dict` can also be integer value, real value, string, or even tuple. But, it cannot be list, dict, or set but `value` of a `dict` can be any data types.
+  ],
+  box()[
+    ```py
+    my_dict = {}
+    my_dict[1] = 8.00
+    my_dict[3.75] = [3, 7, 6]
+    my_dict['Hello'] = 'World'
+    my_dict[(2,99)] = 999
+    # but
+    my_dict[[1,2,3]] = '123' # This is not allowed.
+    # Cannot use list as a key
+    ```
+  ],
+  box()[
+    There are `keys()`, `values()`, and `items()` that can be used with `for...in`.
+  ],
+  box()[
+    ```py
+    d = {1:7, 2:8, 3:9]
+    # accessing each key in d and assign it to e
+    for e in d:
+
+    # accessing each key in d and assign it to e
+    for e in d.keys():
+
+    # accessing each value in d and assign it to e
+    for e in d.values():
+
+    # accessing each pairs in d as a tuple and
+    # assign it to e
+    # e[0] is key, e[1] is value
+    for e in d.items():
+
+    # accessing each key, value of d and
+    # assign it to k, v
+    for k,v in d.items():
+    ```
+    #sidenote(
+      box()[
+        *Prior to Python 3.7*, when looping through dictionary, *it will not be by an insertion order rather it will be by random.* (For technical person, it will be by hash number order).\ \
+        *But since Python 3.7*, when looping through dictionary, *it will always be by an insertion order.*\ \
+        *Recommendation*, when creating dictionary we should always *keep the insertion order as a separate list* and looping using that instead. (if we want to keep the same behavior accross all version of *Python 3*)
+      ]
+    )
+  ],
+  box()[
+    Function `keys()`, `values()`, and `items()` will not result in `list` but something similar to `list` which could be used in `for...in` but cannot be accessed via index.
+    #technical(box()[It calls an *iterator object* which will always return value until a Stopiteration error occur that's meant we can write any custom object (which will be in detail on last subject) to be used inside of for...in loop. That's also why not every object in python that can be used in for...in but might not be able to access via index.])
+  ],
+  box()[
+    ```py
+    d = {
+      'aka': 'as known as',
+      'so': 'significant other'
+    }
+    x = d.keys()
+
+    print(x[1])
+    # this is wrong because x is not a list
+
+    # If you want to access all key as a list
+    # just turn it into a list.
+    x = list( d.keys() )
+    print(x[1])
+    """
+    This is allowed because x is now a list so we could use x[1] but the order of a list is depended on Python version.
+    """
+    ```
+  ],
+  box()[
+    Function `d.update(d1)` means we adding new information from dict d1 into d and if key in d1 is already existed in d, it will update that value instead.
+  ],
+  box()[
+    ```py
+    A = {1:'one', 2:'two'}
+    B = {1:'nueng', 3:'sarm'}
+    A.update(B)
+    """
+    This will result in A become
+    {1: 'nueng', 2:'two', 3:'sarm'}
+    but B will stay the same.
+    """
+    ```
+  ],
+  box()[
+    Function `pop(key)` will remove the pair of data that has a same `key`. but if `key` does not exist, it will cause an error.
+  ],
+  box()[
+    ```py
+    C = {1: 'one', 2: 'two', 3:'three'}
+    x = C.pop(1)
+    """
+    This will result in
+    x = 'one'
+    C = {2: 'two', 3: 'three'}
+    """
+    y = C.pop(4) # this will cause an error
+    ```
+  ],
+  box()[
+    Using `in` to check if `key`, `value` or `(key,value)` pair is in dict or not but checking `value` is slower than the last two.
+    #technical(box()[
+      Searching by value is using *linear search*. (O(n))\ But others is using a *hash search*. (O(1))
+    ])
+  ],
+  box()[
+    ```py
+    D = {1: 'one', 2: 'two', 3: 'three'}
+    x = 1 in D # x = True
+    y = 4 in D.keys() # y = False
+    z = 'two' in D.values() # z = True
+    w = (2, 'two') in D.items() # w = True
+    """
+    Searching using keys and items is much faster than searching by values.
+    """
+    ```
+  ]
+)

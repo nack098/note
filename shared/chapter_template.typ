@@ -65,6 +65,7 @@
 #let innervoice(body) = callout("Inner Voice", rgb("#e74c3c"), body)
 #let concept(body) = callout("Core Concept", rgb("#3498db"), body)
 #let definition(body) = callout("Definition", rgb("#f39c12"), body)
+#let technical(body) = callout("Technical Note", rgb("#f39c12"), body)
 
 #let chapter(
   name: "Untitle",
